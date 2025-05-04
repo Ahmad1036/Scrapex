@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🍓 Scrapex Quick Recipe Fetcher</title>
+
+  <!-- Import Montserrat font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #fff0f5;
+      color: #4b2e2e;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d94f70;
+      margin-top: 30px;
+      font-weight: 700;
+    }
+
+    .prompt {
+      text-align: center;
+      margin: 20px;
+    }
+
+    input[type="text"] {
+      padding: 12px 20px;
+      font-size: 18px;
+      width: 320px;
+      border: 2px solid white;
+      border-radius: 12px;
+      background-color: #fff5f8;
+      color: #d94f70;
+      outline: none;
+      transition: all 0.4s ease;
+      background-clip: padding-box;
+      position: relative;
+      z-index: 1;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    input[type="text"]::placeholder {
+      color: #d94f70;
+      opacity: 0.7;
+    }
+    .background-img {
+  position: absolute;
+  opacity: 0.8;
+  z-index: -1;
+  animation: float 30s infinite linear;
+}
+
+
+    input[type="text"]:focus {
+      border: 2px solid transparent;
+      background-image: 
+        linear-gradient(#fff5f8, #fff5f8),
+        linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet, red);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      animation: rainbowGlow 5s linear infinite, pulseGlow 3s ease-in-out infinite;
+      box-shadow: 0 0 15px 5px rgba(255, 0, 150, 0.3), 
+                  0 0 30px 10px rgba(255, 140, 0, 0.2), 
+                  0 0 45px 15px rgba(0, 200, 255, 0.2);
+    }
+
+    @keyframes rainbowGlow {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 200% 50%;
+      }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 15px 5px rgba(255, 0, 150, 0.3),
+                    0 0 30px 10px rgba(255, 140, 0, 0.2),
+                    0 0 45px 15px rgba(0, 200, 255, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 25px 10px rgba(255, 0, 150, 0.5),
+                    0 0 40px 15px rgba(255, 140, 0, 0.3),
+                    0 0 60px 20px rgba(0, 200, 255, 0.3);
+      }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 10px;
+    }
+
+    .card {
+      background-color: #ffe6eb;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.3s ease;
+      overflow: hidden;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .preview {
+      font-weight: 700;
+      font-size: 16px;
+      color: #7b2c3f;
+    }
+
+    .details {
+      opacity: 0;
+      max-height: 0;
+      transition: all 0.4s ease;
+      overflow-y: auto;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .card.active .details {
+      opacity: 1;
+      max-height: 1000px;
+    }
+
+ 
+    .background-img:nth-child(1) { top: 10%; left: 5%; width: 100px; }
+    .background-img:nth-child(2) { top: 60%; left: 60%; width: 120px; }
+    .background-img:nth-child(3) { top: 30%; left: 40%; width: 90px; }
+    .background-img:nth-child(4) { top: 70%; left: 10%; width: 100px; }
+    .background-img:nth-child(5) { top: 90%; left: 80%; width: 120px; }
+    .background-img:nth-child(6) { top: 5%; left: 55%; width: 90px; }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    .youtube-video {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+<!-- Your uploaded custom food images floating around -->
+<img class="background-img" src="img1.png" style="top: 5%; left: 5%; width: 100px;">
+<img class="background-img" src="img2.png" style="top: 15%; left: 75%; width: 90px;">
+<img class="background-img" src="img3.png" style="top: 30%; left: 20%; width: 100px;">
+<img class="background-img" src="img4.png" style="top: 40%; left: 60%; width: 110px;">
+<img class="background-img" src="img5.png" style="top: 55%; left: 10%; width: 95px;">
+<img class="background-img" src="img6.png" style="top: 65%; left: 80%; width: 100px;">
+<img class="background-img" src="img7.png" style="top: 75%; left: 25%; width: 90px;">
+<img class="background-img" src="img8.png" style="top: 85%; left: 65%; width: 100px;">
+<img class="background-img" src="img9.png" style="top: 90%; left: 15%; width: 95px;">
+<img class="background-img" src="img10.png" style="top: 5%; left: 85%; width: 100px;">
+<img class="background-img" src="img11.png" style="top: 50%; left: 45%; width: 110px;">
+
+
+  <h1>Scrapex Quick Recipe Fetcher</h1>
+
+  <div class="prompt">
+    <input type="text" placeholder="What's your craving today?">
+  </div>
+
+  <div class="grid">
+    <!-- Recipe and video cards will be inserted here -->
+  </div>
+  <script>
+    function toggleCard(card) {
+      card.classList.toggle('active');
+    }
+
+    document.querySelector('input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const startTime = performance.now();
+        const query = this.value.trim();
+        if (query) {
+          fetch('/search', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query: query })
+          })
+          .then(response => response.json())
+          .then(data => {
+            updateRecipeCards(data.recipes, data.videos);
+            const endTime = performance.now();
+      const duration = (endTime - startTime) / 1000;
+
+      document.getElementById('timer').innerText = `⏱️ Fetched in ${duration.toFixed(2)} seconds`;
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        }
+       
+
+      }
+    });
+
+function updateRecipeCards(recipes, videos) {
+  const grid = document.querySelector('.grid');
+  grid.innerHTML = '';
+
+  for (let i = 0; i < 6; i++) {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    card.onclick = function() { toggleCard(this); };
+    grid.appendChild(card);
+
+    if (i < 3 && i < recipes.length) {
+      const recipe = recipes[i];
+
+      // First 3 cards: Recipe Text ONLY
+      const recipeHtml = `
+        <div class="preview">${recipe.title}</div>
+        <div class="details">
+          <strong>Ingredients:</strong><br>${recipe.ingredients}<br><br>
+          <strong>Instructions:</strong><br>${recipe.instructions}<br><br>
+        </div>
+      `;
+
+      card.innerHTML = recipeHtml;
+    } else if (i >= 3 && videos && (i - 3) < videos.length) {
+      const video = videos[i-3];
+        // last three cards display only youtube videos
+        const youtubeUrl = `https://www.youtube.com/embed/${video.videoId}`;
+
+        card.innerHTML = `
+          <div class="preview">${video.title}</div>
+          <div class="details">
+            <div class="youtube-video">
+              <iframe width="560" height="315" src="${youtubeUrl}" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <p><strong>Captions:</strong><br>${video.captions}</p>
+          </div>
+        `;
+
+    } else {
+      card.innerHTML = `<div class="preview">Coming Soon...</div><div class="details">Stay tuned for more recipes and videos!</div>`;
+    }
+  }
+}
+  </script>
+
+
+<div id="timer" style="text-align:center; font-weight:bold; margin-top:20px;"></div>
+
+
+
+<!-- Example trigger button -->
+<div style="text-align:center; margin-top:10px;">
+  <button onclick="fetchData()">Fetch Recipe</button>
+</div>
+
+</body>
+</html>
